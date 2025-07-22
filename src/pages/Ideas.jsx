@@ -1,6 +1,9 @@
+import Banner from "../components/Banner";
+
 const Ideas = () => {
   return (
     <>
+      <Banner />
       <h1>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
         reiciendis tempore officiis labore quia quo architecto? Laborum magnam
