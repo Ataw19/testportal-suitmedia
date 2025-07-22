@@ -26,7 +26,6 @@ const Ideas = () => {
         setMeta(response.meta);
       }
       console.log("Fetched ideas:", response);
-      setIdeas(response.data);
       setLoading(false);
     };
 

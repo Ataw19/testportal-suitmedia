@@ -1,18 +1,19 @@
 export const fetchIdeas = async ({ page, size, sort = "-published_at" }) => {
+  const API_BASE_URL = import.meta.env.DEV
+    ? "/api"
+    : "https://suitmedia-backend.suitdev.com/api";
+
   try {
-    // 1. Buat params untuk data non-array
     const params = new URLSearchParams({
       "page[number]": page,
       "page[size]": size,
       sort: sort,
     });
 
-    // 2. Tambahkan parameter array secara manual dengan looping
     const appendData = ["small_image", "medium_image"];
     appendData.forEach((item) => params.append("append[]", item));
 
-    // URL yang dihasilkan sekarang akan benar
-    const response = await fetch(`/api/ideas?${params.toString()}`, {
+    const response = await fetch(`${API_BASE_URL}/ideas?${params.toString()}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
