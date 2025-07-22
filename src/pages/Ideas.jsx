@@ -1,6 +1,7 @@
 import Banner from "../components/Banner";
 import IdeaCard from "../components/IdeaCard";
 import SortFilterBar from "../components/FilterBar.jsx";
+import Pagination from "../components/Pagination.jsx";
 import { fetchIdeas } from "../apis/api.js";
 import { useEffect, useState } from "react";
 
@@ -61,6 +62,12 @@ const Ideas = () => {
           ))}
         </div>
       )}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={meta.last_page || 1}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 };
