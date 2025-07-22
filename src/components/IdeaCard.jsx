@@ -8,11 +8,16 @@ const IdeaCard = ({ idea }) => {
     }
   );
 
+  console.log(
+    "Image URL:",
+    idea.medium_image?.[0].url || idea.small_image?.[0].url
+  );
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-1 mx-6">
       <div className="aspect-[3/2]">
         <img
-          src={idea.medium_image?.[0]?.url || idea.small_image?.[0]?.url}
+          src={idea.medium_image?.[0].url || idea.small_image?.[0].url}
           alt={idea.title}
           className="w-full h-full object-cover"
           loading="lazy"
