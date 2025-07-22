@@ -1,53 +1,35 @@
 import Banner from "../components/Banner";
 import IdeaCard from "../components/IdeaCard";
-import IdeaImage from "../assets/hero-car.jpg";
+import { fetchIdeas } from "../apis/api.js";
+import { useEffect, useState } from "react";
 
 const Ideas = () => {
+  const [ideas, setIdeas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadIdeas = async () => {
+      const response = await fetchIdeas({ page: 1, size: 8 });
+      console.log("Fetched ideas:", response);
+      setIdeas(response.data);
+      setLoading(false);
+    };
+
+    loadIdeas();
+  }, []);
+
   return (
     <>
       <Banner />
-      <div className=" mt-10 grid grid-cols-4 gap-4">
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title asdasdasdasdasdassdafiuhyasdfiyuasdiygadSIGasdgh diuasgdakljs daskugdiaslu dgyasu dsayug askdgj asdga dasidg a asidgalisd ials dlj"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-        <IdeaCard
-          image={IdeaImage}
-          title="My Idea Title"
-          date="January 1, 2023"
-        />
-      </div>
+      {loading ? (
+        <p>Loading ideas...</p>
+      ) : (
+        <div className="grid grid-cols-4 gap-6">
+          {ideas.map((idea) => (
+            <IdeaCard key={idea.id} idea={idea} />
+          ))}
+        </div>
+      )}
     </>
   );
 };
